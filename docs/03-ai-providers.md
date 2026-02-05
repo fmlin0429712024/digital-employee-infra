@@ -1,4 +1,10 @@
-# AI Providers
+# 03 - AI Providers
+
+## Overview
+
+The Digital Employee uses a **multi-tier fallback strategy** to ensure 24/7 availability while minimizing costs.
+
+---
 
 ## Fallback Strategy
 
@@ -17,6 +23,8 @@
 └─────────────────────────────────────────────────────────────┘
 ```
 
+---
+
 ## Tier 1: Antigravity (Primary)
 
 | Attribute | Value |
@@ -25,6 +33,12 @@
 | **Cost** | FREE |
 | **Models** | Claude 3.5 Opus, Gemini 3 Pro, Claude Sonnet 4.5 |
 | **Quota** | Resets every 5 hours |
+| **Best For** | Day-to-day usage |
+
+**Pros**: Free, access to Claude and Gemini
+**Cons**: Quota limits, occasional downtime
+
+---
 
 ## Tier 2: Google AI Studio (Backup)
 
@@ -35,6 +49,11 @@
 | **Models** | Gemini 1.5 Pro |
 | **Use Case** | Immediate failover when Antigravity exhausted |
 
+**Pros**: Free, reliable Google infrastructure
+**Cons**: Rate limits, Gemini only
+
+---
+
 ## Tier 3: Vertex AI (Safety Net)
 
 | Attribute | Value |
@@ -44,7 +63,10 @@
 | **Models** | Gemini 2.0/2.5 Flash, Gemini 1.5 Pro |
 | **Use Case** | Enterprise backup, guaranteed availability |
 
-### Vertex AI Pricing
+**Pros**: No quota limits, enterprise SLA
+**Cons**: Costs money (but we have $18K credits)
+
+### Pricing
 
 | Model | Context | Input Cost | Output Cost |
 |-------|---------|------------|-------------|
@@ -54,11 +76,20 @@
 | gemini-1.5-pro | 1M tokens | $1.25 | $5.00 |
 | gemini-2.5-pro | 1M tokens | $1.25 | $10.00 |
 
-## Switch Models
+---
+
+## Model Management
+
+### Check Current Model
 
 ```bash
-# Via CLI
 openclaw models status
+```
+
+### Switch Models
+
+```bash
+# CLI
 openclaw models set google-vertex/gemini-2.5-pro
 openclaw models set google-antigravity/gemini-3-pro-low  # Back to free
 
@@ -67,12 +98,38 @@ openclaw models set google-antigravity/gemini-3-pro-low  # Back to free
 "Use Claude Sonnet"
 ```
 
-## Required Environment Variables
+---
 
-For Vertex AI to work, these must be set in the systemd service:
+## Configuration
+
+### Vertex AI Service Account
+
+1. Create service account in GCP Console
+2. Grant `Vertex AI User` role
+3. Download JSON key
+4. Save to `~/.openclaw/keys/vertex-auth.json`
+
+### Environment Variables
+
+In `~/.config/systemd/user/openclaw-gateway.service.d/vertex.conf`:
+
+```ini
+[Service]
+Environment="GOOGLE_APPLICATION_CREDENTIALS=/home/USER/.openclaw/keys/vertex-auth.json"
+Environment="GOOGLE_CLOUD_PROJECT=linkhealth-care-2024"
+Environment="GOOGLE_CLOUD_LOCATION=us-central1"
+```
+
+Apply changes:
 
 ```bash
-GOOGLE_APPLICATION_CREDENTIALS=/path/to/vertex-auth.json
-GOOGLE_CLOUD_PROJECT=linkhealth-care-2024
-GOOGLE_CLOUD_LOCATION=us-central1
+systemctl --user daemon-reload
+systemctl --user restart openclaw-gateway
 ```
+
+---
+
+## Navigation
+
+- Previous: [02-infrastructure.md](02-infrastructure.md)
+- Next: [04-communication.md](04-communication.md)

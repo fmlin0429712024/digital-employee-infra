@@ -62,6 +62,8 @@ Build a self-healing, always-available AI assistant that:
 
 ## Current Stack
 
+### Core Infrastructure
+
 | Layer | Component | Technology | Status |
 |-------|-----------|------------|--------|
 | **Infrastructure** | Cloud Host | GCP n2-standard-4 | ✅ Live |
@@ -74,6 +76,19 @@ Build a self-healing, always-available AI assistant that:
 | **Search** | Web Intelligence | Brave Search API | ✅ Enabled |
 | **Voice STT** | Speech-to-Text | Whisper (local) | ✅ Active |
 | **Voice TTS** | Text-to-Speech | edge-tts (Microsoft) | ✅ Active |
+
+### Extended Capabilities
+
+| Capability | Technology | Status |
+|------------|------------|--------|
+| **Browser Automation** | Playwright + Chromium | ✅ Active |
+| **Persistent Memory** | SQLite | ✅ Active |
+| **Document Processing** | Poppler, Tesseract, pandas | ✅ Active |
+| **Email Gateway** | Gmail API | ✅ Active |
+| **Calendar Integration** | Google Calendar API | ✅ Active |
+| **File Storage** | GCS Bucket | ✅ Active |
+| **Scheduled Tasks** | Cron | ✅ Active |
+| **Version Control** | GitHub SSH | ✅ Active |
 
 ---
 
@@ -98,12 +113,16 @@ Build a self-healing, always-available AI assistant that:
 
 ## Documentation
 
-| Topic | Description |
-|-------|-------------|
-| [Infrastructure Setup](docs/infrastructure.md) | GCP VM, OpenClaw gateway, systemd configuration |
-| [AI Providers](docs/ai-providers.md) | Antigravity, AI Studio, Vertex AI fallback chain |
-| [Messaging Channels](docs/messaging.md) | Telegram & WhatsApp integration |
-| [Voice Integration](docs/voice.md) | Whisper STT + edge-tts TTS setup |
+Read the docs in order for a complete walkthrough:
+
+| # | Document | Description |
+|---|----------|-------------|
+| 01 | [Overview](docs/01-overview.md) | What is a Digital Employee, architecture |
+| 02 | [Infrastructure](docs/02-infrastructure.md) | GCP VM, environment setup, GitHub access |
+| 03 | [AI Providers](docs/03-ai-providers.md) | Model fallback strategy, Vertex AI |
+| 04 | [Communication](docs/04-communication.md) | Telegram, WhatsApp, voice integration |
+| 05 | [Capabilities](docs/05-capabilities.md) | Browser, email, calendar, storage, memory |
+| 06 | [Quick Reference](docs/06-quick-reference.md) | Commands, paths, troubleshooting |
 
 ---
 
@@ -134,27 +153,42 @@ openclaw models set google-vertex/gemini-2.5-pro
 
 ## Key Locations
 
+### Cloud Resources
+
 | Resource | Location |
 |----------|----------|
 | **GCP Console** | https://console.cloud.google.com/ |
 | **GCP Project** | linkhealth-care-2024 |
 | **VM Instance** | openclaw-desktop (us-central1-a) |
+| **GCS Bucket** | gs://openclaw-files-linkhealth |
+
+### VM Paths
+
+| Resource | Path |
+|----------|------|
+| **OpenClaw Config** | `~/.openclaw/openclaw.json` |
+| **Memory Database** | `~/.openclaw/data/memory.db` |
+| **OAuth Credentials** | `~/.openclaw/keys/oauth-credentials.json` |
+| **Gmail Token** | `~/.openclaw/keys/gmail-token.pickle` |
+| **Calendar Token** | `~/.openclaw/keys/calendar-token.pickle` |
+| **Helper Scripts** | `~/.openclaw/scripts/` |
+| **Logs** | `/tmp/openclaw/` |
 | **Gateway Port** | 127.0.0.1:18789 |
-| **Config File** | `~/.openclaw/openclaw.json` |
-| **Logs** | `/tmp/openclaw/openclaw-*.log` |
 
 ---
 
 ## Repository Structure
 
 ```
-turtle/
+digital-employee-infra/
 ├── README.md                    # Project overview
-└── docs/                        # Topic-based documentation
-    ├── infrastructure.md       # GCP VM, systemd, gateway
-    ├── ai-providers.md         # Model fallback strategy
-    ├── messaging.md            # Telegram & WhatsApp
-    └── voice.md                # STT & TTS configuration
+└── docs/
+    ├── 01-overview.md           # What is a Digital Employee
+    ├── 02-infrastructure.md     # GCP VM, environment setup
+    ├── 03-ai-providers.md       # Model fallback strategy
+    ├── 04-communication.md      # Messaging & voice
+    ├── 05-capabilities.md       # Extended capabilities
+    └── 06-quick-reference.md    # Commands, paths, cheatsheet
 ```
 
 ---
