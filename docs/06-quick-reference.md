@@ -120,6 +120,9 @@ crontab -e    # Edit jobs
 |----------|--------|-------------|
 | `0 8 * * *` | daily-briefing.sh | Morning greeting (8 AM) |
 | `*/15 * * * *` | health-check.sh | Gateway health check |
+| `0 2 * * *` | log-cleanup.sh | Compress/delete old logs |
+| `0 3 * * *` | backup-memory.sh | SQLite backup to GCS |
+| `0 */6 * * *` | disk-monitor.sh | Disk space alert (>80%) |
 
 ---
 

@@ -451,6 +451,9 @@ gsutil ls gs://openclaw-files-linkhealth/
 |----------|------|-------------|
 | `0 8 * * *` | daily-briefing.sh | Morning greeting at 8 AM |
 | `*/15 * * * *` | health-check.sh | Gateway health check every 15 min |
+| `0 2 * * *` | log-cleanup.sh | Compress old logs, delete after 30 days |
+| `0 3 * * *` | backup-memory.sh | Backup SQLite to GCS |
+| `0 */6 * * *` | disk-monitor.sh | Check disk usage, alert if >80% |
 
 ### Managing Cron Jobs
 
@@ -492,6 +495,50 @@ tail -f /tmp/openclaw/cron.log
 # Every 30 minutes
 */30 * * * *
 ```
+
+---
+
+## Reliability & Maintenance
+
+Automated systems to keep the Digital Employee running smoothly.
+
+### Log Management
+
+**Script**: `~/.openclaw/scripts/log-cleanup.sh`
+
+- Compresses logs older than 1 day
+- Deletes compressed logs older than 30 days
+- Runs daily at 2 AM
+
+### Database Backup
+
+**Script**: `~/.openclaw/scripts/backup-memory.sh`
+
+- Backs up SQLite memory database to GCS
+- Location: `gs://openclaw-files-linkhealth/backups/memory/`
+- Retention: 30 days
+- Runs daily at 3 AM
+
+**Restore from backup:**
+```bash
+gsutil cp gs://openclaw-files-linkhealth/backups/memory/memory-YYYY-MM-DD.db ~/.openclaw/data/memory.db
+```
+
+### Disk Monitoring
+
+**Script**: `~/.openclaw/scripts/disk-monitor.sh`
+
+- Checks disk usage every 6 hours
+- Alerts if usage exceeds 80%
+- Logs to `/tmp/openclaw/cron.log`
+
+### Security Updates
+
+**Technology**: Unattended Upgrades
+
+- Automatically installs security patches
+- Runs daily
+- Config: `/etc/apt/apt.conf.d/20auto-upgrades`
 
 ---
 
