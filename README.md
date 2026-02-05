@@ -123,6 +123,7 @@ Read the docs in order for a complete walkthrough:
 | 04 | [Communication](docs/04-communication.md) | Telegram, WhatsApp, voice integration |
 | 05 | [Capabilities](docs/05-capabilities.md) | Browser, email, calendar, storage, memory |
 | 06 | [Quick Reference](docs/06-quick-reference.md) | Commands, paths, troubleshooting |
+| 07 | [Skills Development](docs/07-skills.md) | Creating custom skills (Gmail, Calendar, etc.) |
 
 ---
 
@@ -188,7 +189,8 @@ digital-employee-infra/
     ├── 03-ai-providers.md       # Model fallback strategy
     ├── 04-communication.md      # Messaging & voice
     ├── 05-capabilities.md       # Extended capabilities
-    └── 06-quick-reference.md    # Commands, paths, cheatsheet
+    ├── 06-quick-reference.md    # Commands, paths, cheatsheet
+    └── 07-skills.md             # Skills development guide
 ```
 
 ---

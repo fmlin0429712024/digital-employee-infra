@@ -226,10 +226,11 @@ gcloud compute instances describe openclaw-desktop --zone=us-central1-a --format
 | 04 | [04-communication.md](04-communication.md) | Messaging & voice |
 | 05 | [05-capabilities.md](05-capabilities.md) | Extended capabilities |
 | 06 | [06-quick-reference.md](06-quick-reference.md) | This document |
+| 07 | [07-skills.md](07-skills.md) | Skills development guide |
 
 ---
 
 ## Navigation
 
 - Previous: [05-capabilities.md](05-capabilities.md)
-- Start: [01-overview.md](01-overview.md)
+- Next: [07-skills.md](07-skills.md)
