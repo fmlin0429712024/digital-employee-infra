@@ -98,9 +98,19 @@ crontab -e    # Edit jobs
 | OAuth Credentials | `~/.openclaw/keys/oauth-credentials.json` |
 | Gmail Token | `~/.openclaw/keys/gmail-token.pickle` |
 | Calendar Token | `~/.openclaw/keys/calendar-token.pickle` |
-| Vertex Auth | `~/.openclaw/keys/vertex-auth.json` |
+| Vertex Auth (backup) | `~/.openclaw/keys/vertex-auth.json` |
 | Helper Scripts | `~/.openclaw/scripts/` |
 | Logs | `/tmp/openclaw/` |
+
+### Vertex AI Authentication
+
+| Component | Value |
+|-----------|-------|
+| **Auth Method** | VM Default Service Account (recommended) |
+| **Service Account** | `51058313466-compute@developer.gserviceaccount.com` |
+| **IAM Role** | `roles/aiplatform.user` |
+| **Project** | `linkhealth-care-2024` |
+| **Region** | `us-central1` |
 
 ---
 
