@@ -13,6 +13,8 @@ Deploy your own private ChatGPT-like interface powered by **DeepSeek R1 Distill 
 
 ## 📋 Prerequisites
 
+> **Need to create a GPU VM?** See [../docs/12-gpu-vm-provisioning.md](../docs/12-gpu-vm-provisioning.md) for complete setup instructions.
+
 - Google Cloud Platform account with credits
 - GCP VM with NVIDIA L4 GPU (or similar)
 - Docker and Docker Compose installed on VM

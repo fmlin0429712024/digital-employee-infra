@@ -62,6 +62,7 @@ The LLM deployment code is maintained in:
 - **Repository**: `LLM-Local-Deployment/` subdirectory
 - **Full Documentation**: See `LLM-Local-Deployment/README.md`
 - **Walkthrough**: See `LLM-Local-Deployment/WALKTHROUGH.md`
+- **GPU VM Setup**: See [12-gpu-vm-provisioning.md](12-gpu-vm-provisioning.md) for creating a new GPU VM
 
 ### Quick Start
 
@@ -242,5 +243,6 @@ This local LLM deployment is a **foundational component** for the [10-agent-fram
 ## Navigation
 
 - Previous: [10-agent-framework-vision.md](10-agent-framework-vision.md)
+- Next: [12-gpu-vm-provisioning.md](12-gpu-vm-provisioning.md)
 - Related: [03-ai-providers.md](03-ai-providers.md)
 - Start: [01-overview.md](01-overview.md)

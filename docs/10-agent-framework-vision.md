@@ -136,5 +136,5 @@ Infra: Basic GCP            →    GPU VPC + vLLM
 ## Navigation
 
 - Previous: [09-lead-developer.md](09-lead-developer.md)
-- Next: [11-local-llm-deployment.md](11-local-llm-deployment.md)
+- Next: [11-local-llm-deployment.md](11-local-llm-deployment.md) → [12-gpu-vm-provisioning.md](12-gpu-vm-provisioning.md)
 - Start: [01-overview.md](01-overview.md)

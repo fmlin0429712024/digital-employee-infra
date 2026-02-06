@@ -128,6 +128,7 @@ Read the docs in order for a complete walkthrough:
 | 09 | [Lead Developer Agent](docs/09-lead-developer.md) | OpenCode integration for coding tasks |
 | 10 | [Agent Framework Vision](docs/10-agent-framework-vision.md) | Future: CDI Digital Auditor architecture |
 | 11 | [Local LLM Deployment](docs/11-local-llm-deployment.md) | GPU-accelerated private inference with vLLM |
+| 12 | [GPU VM Provisioning](docs/12-gpu-vm-provisioning.md) | **Step-by-step guide to create GPU VM** |
 
 ---
 
@@ -198,7 +199,8 @@ digital-employee-infra/
 │   ├── 08-architecture-journey.md    # Evolution to OpenClaw
 │   ├── 09-lead-developer.md          # OpenCode integration
 │   ├── 10-agent-framework-vision.md  # Future CDI architecture
-│   └── 11-local-llm-deployment.md    # GPU inference setup
+│   ├── 11-local-llm-deployment.md    # GPU inference setup
+│   └── 12-gpu-vm-provisioning.md     # GPU VM creation guide
 ├── export/
 │   └── images/                       # Architecture diagrams
 └── LLM-Local-Deployment/             # Local GPU inference stack
