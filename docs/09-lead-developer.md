@@ -407,4 +407,5 @@ opencode models google
 ## Navigation
 
 - Previous: [08-architecture-journey.md](08-architecture-journey.md)
+- Next: [10-agent-framework-vision.md](10-agent-framework-vision.md)
 - Start: [01-overview.md](01-overview.md)
