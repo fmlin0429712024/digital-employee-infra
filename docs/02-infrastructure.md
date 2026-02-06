@@ -32,10 +32,83 @@ gcloud compute instances create openclaw-desktop \
     --scopes=cloud-platform
 ```
 
-### Connect to VM
+### VM Access Methods
+
+The VM is secured with IAP-only SSH access. Direct SSH from the internet is blocked.
+
+#### Option 1: Local Terminal (Recommended)
 
 ```bash
-gcloud compute ssh --zone "us-central1-a" "openclaw-desktop" --project "linkhealth-care-2024"
+# SSH via IAP tunnel
+gcloud compute ssh openclaw-desktop \
+    --zone=us-central1-a \
+    --project=linkhealth-care-2024 \
+    --tunnel-through-iap
+```
+
+**Pro tip:** Add an alias to `~/.bashrc` or `~/.zshrc`:
+```bash
+alias openclaw-ssh='gcloud compute ssh openclaw-desktop --zone=us-central1-a --project=linkhealth-care-2024 --tunnel-through-iap'
+```
+
+#### Option 2: GCP Cloud Shell
+
+1. Open GCP Console: https://console.cloud.google.com
+2. Click the `>_` Cloud Shell icon (top-right)
+3. Run:
+   ```bash
+   gcloud compute ssh openclaw-desktop --zone=us-central1-a --tunnel-through-iap
+   ```
+
+#### Option 3: Chrome Remote Desktop (GUI)
+
+For graphical desktop access (OAuth flows, debugging, etc.):
+
+1. Go to: https://remotedesktop.google.com/access
+2. Select "openclaw-desktop"
+3. Enter PIN when prompted
+
+**Note:** CRD uses outbound HTTPS, no firewall rules needed.
+
+#### What Doesn't Work
+
+| Method | Status | Reason |
+|--------|--------|--------|
+| GCP Console "SSH" button | ❌ Blocked | Uses direct SSH to external IP |
+| Direct SSH to 34.66.121.98 | ❌ Blocked | Firewall only allows IAP range |
+| RDP (port 3389) | ❌ Deleted | Rule removed for security |
+
+---
+
+## Security Configuration
+
+### Firewall Rules
+
+| Rule | Ports | Source | Purpose |
+|------|-------|--------|---------|
+| allow-ssh-iap | 22 | 35.235.240.0/20 | SSH via IAP only |
+| allow-openclaw-access | 80, 443 | 0.0.0.0/0 | Web access (if needed) |
+| default-allow-internal | all | 10.128.0.0/9 | GCP internal traffic |
+
+### Brute Force Protection
+
+The VM runs fail2ban to block repeated failed SSH attempts:
+
+```bash
+# Check fail2ban status
+sudo fail2ban-client status sshd
+
+# View banned IPs
+sudo fail2ban-client status sshd | grep "Banned IP"
+```
+
+### Credential Security
+
+All sensitive files have restricted permissions (600/700):
+
+```bash
+# Verify permissions
+ls -la ~/.openclaw/keys/
 ```
 
 ---

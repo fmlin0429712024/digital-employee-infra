@@ -238,6 +238,51 @@ python3 ~/.openclaw/scripts/calendar-cli.py create "Meeting" "2026-02-05T18:00:0
 
 ---
 
+### 📁 Google Drive Skill
+
+**Purpose:** Store, share, and manage files in Google Drive
+
+**CLI Script:** `~/.openclaw/scripts/drive-cli.py`
+
+**Commands:**
+
+| Command | Description |
+|---------|-------------|
+| `list` | List recent files (--query, --max) |
+| `search <query>` | Search for files by name |
+| `upload <path>` | Upload a file (--folder, --name) |
+| `download <id> <path>` | Download a file |
+| `share <id> <email>` | Share a file (--role: reader/writer/commenter) |
+| `mkdir <name>` | Create a folder (--parent) |
+| `info <id>` | Get file details |
+| `delete <id>` | Move file to trash |
+
+**Examples:**
+```bash
+# List recent files
+python3 ~/.openclaw/scripts/drive-cli.py list --max 10
+
+# Search for files
+python3 ~/.openclaw/scripts/drive-cli.py search "quarterly report"
+
+# Upload and share
+python3 ~/.openclaw/scripts/drive-cli.py upload ~/report.pdf
+python3 ~/.openclaw/scripts/drive-cli.py share FILE_ID user@example.com --role writer
+
+# Download a file
+python3 ~/.openclaw/scripts/drive-cli.py download FILE_ID ~/Downloads/file.pdf
+
+# Create folder structure
+python3 ~/.openclaw/scripts/drive-cli.py mkdir "Projects"
+python3 ~/.openclaw/scripts/drive-cli.py upload ~/spec.docx --folder FOLDER_ID
+```
+
+**Prerequisites:**
+- Drive API enabled in GCP
+- OAuth token at `~/.openclaw/keys/drive-token.pickle`
+
+---
+
 ## Skill Requirements
 
 The `requires` field in SKILL.md metadata specifies what the skill needs:
@@ -319,7 +364,6 @@ chmod +x ~/.openclaw/scripts/<name>-cli.py
 
 | Skill | Purpose | API/Service |
 |-------|---------|-------------|
-| Google Drive | File storage, sharing | Drive API |
 | Slack | Team messaging | Slack API |
 | Notion | Notes and databases | Notion API |
 | Todoist | Task management | Todoist API |
@@ -332,4 +376,5 @@ chmod +x ~/.openclaw/scripts/<name>-cli.py
 ## Navigation
 
 - Previous: [06-quick-reference.md](06-quick-reference.md)
+- Next: [08-architecture-journey.md](08-architecture-journey.md)
 - Start: [01-overview.md](01-overview.md)
