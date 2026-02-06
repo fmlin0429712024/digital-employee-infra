@@ -124,6 +124,10 @@ Read the docs in order for a complete walkthrough:
 | 05 | [Capabilities](docs/05-capabilities.md) | Browser, email, calendar, storage, memory |
 | 06 | [Quick Reference](docs/06-quick-reference.md) | Commands, paths, troubleshooting |
 | 07 | [Skills Development](docs/07-skills.md) | Creating custom skills (Gmail, Calendar, etc.) |
+| 08 | [Architecture Journey](docs/08-architecture-journey.md) | Evolution from Claude Code to OpenClaw |
+| 09 | [Lead Developer Agent](docs/09-lead-developer.md) | OpenCode integration for coding tasks |
+| 10 | [Agent Framework Vision](docs/10-agent-framework-vision.md) | Future: CDI Digital Auditor architecture |
+| 11 | [Local LLM Deployment](docs/11-local-llm-deployment.md) | GPU-accelerated private inference with vLLM |
 
 ---
 
@@ -182,15 +186,26 @@ openclaw models set google-vertex/gemini-2.5-pro
 
 ```
 digital-employee-infra/
-├── README.md                    # Project overview
-└── docs/
-    ├── 01-overview.md           # What is a Digital Employee
-    ├── 02-infrastructure.md     # GCP VM, environment setup
-    ├── 03-ai-providers.md       # Model fallback strategy
-    ├── 04-communication.md      # Messaging & voice
-    ├── 05-capabilities.md       # Extended capabilities
-    ├── 06-quick-reference.md    # Commands, paths, cheatsheet
-    └── 07-skills.md             # Skills development guide
+├── README.md                         # Project overview
+├── docs/
+│   ├── 01-overview.md                # What is a Digital Employee
+│   ├── 02-infrastructure.md          # GCP VM, environment setup
+│   ├── 03-ai-providers.md            # Model fallback strategy
+│   ├── 04-communication.md           # Messaging & voice
+│   ├── 05-capabilities.md            # Extended capabilities
+│   ├── 06-quick-reference.md         # Commands, paths, cheatsheet
+│   ├── 07-skills.md                  # Skills development guide
+│   ├── 08-architecture-journey.md    # Evolution to OpenClaw
+│   ├── 09-lead-developer.md          # OpenCode integration
+│   ├── 10-agent-framework-vision.md  # Future CDI architecture
+│   └── 11-local-llm-deployment.md    # GPU inference setup
+├── export/
+│   └── images/                       # Architecture diagrams
+└── LLM-Local-Deployment/             # Local GPU inference stack
+    ├── docker-compose.yml            # vLLM + Open WebUI
+    ├── setup.sh                      # Deployment script
+    ├── README.md                     # Deployment guide
+    └── WALKTHROUGH.md                # Step-by-step guide
 ```
 
 ---

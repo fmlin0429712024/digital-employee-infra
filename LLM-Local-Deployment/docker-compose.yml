@@ -1,0 +1,52 @@
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: vllm-service
+    restart: always
+    ipc: host
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN}
+      - VLLM_API_KEY=${VLLM_API_KEY}
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    ports:
+      - "8000:8000"
+    networks:
+      - llm-net
+    command: >
+      --model deepseek-ai/DeepSeek-R1-Distill-Llama-8B
+      --gpu-memory-utilization 0.90
+      --max-model-len 8192
+      --dtype auto
+      --api-key ${VLLM_API_KEY}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: always
+    depends_on:
+      - vllm
+    ports:
+      - "3000:8080"
+    environment:
+      - OPENAI_API_BASE_URL=http://vllm:8000/v1
+      - OPENAI_API_KEY=${VLLM_API_KEY}
+      - WEBUI_NAME=DeepSeek R1 Private
+    volumes:
+      - open-webui-data:/app/backend/data
+    networks:
+      - llm-net
+
+networks:
+  llm-net:
+    driver: bridge
+
+volumes:
+  open-webui-data:

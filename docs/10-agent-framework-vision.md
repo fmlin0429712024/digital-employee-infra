@@ -130,3 +130,11 @@ Infra: Basic GCP            →    GPU VPC + vLLM
 1. Formal Treatment Data query → Foundation for "Retrieve" stage
 2. Connect Agent to ETL → Foundation for "Delegate" stage
 3. Agent Autonomous enhancement → Stepping stone to "Reason" stage
+
+---
+
+## Navigation
+
+- Previous: [09-lead-developer.md](09-lead-developer.md)
+- Next: [11-local-llm-deployment.md](11-local-llm-deployment.md)
+- Start: [01-overview.md](01-overview.md)
