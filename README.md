@@ -1,226 +1,82 @@
-# Turtle 🐢
+# Turtle 🐢 - Digital Employee
 
-> *"Slow and steady wins the race"* - Building an AI-powered Digital Employee, one day at a time.
+> *"Slow and steady wins the race"*
 
-My personal journey documenting the creation of an autonomous AI agent infrastructure - a 24/7 "Digital Employee" accessible from anywhere.
-
----
-
-## The Vision
-
-Build a self-healing, always-available AI assistant that:
-- **Never sleeps** - 24/7 availability via cloud infrastructure
-- **Multi-channel** - Accessible via Telegram, WhatsApp, and voice
-- **Self-healing** - Automatic failover between AI providers
-- **Cost-optimized** - Free tiers first, paid as backup
-- **Web-aware** - Real-time information via search integration
+24/7 AI-powered assistant running on GCP with OpenClaw.
 
 ---
 
-## Architecture Overview
+## Quick Navigation
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                         COMMAND CENTER                               │
-│                                                                      │
-│     📱 Telegram          📱 WhatsApp           🎤 Voice             │
-│       "Pet"                "Mirror"           (FFmpeg)              │
-│    Quick commands       Deep thinking       Voice notes             │
-│                                                                      │
-│                              │                                       │
-│                              ▼                                       │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │                     🦞 OPENCLAW GATEWAY                      │   │
-│  │                      (2026 Core Engine)                      │   │
-│  │                  24/7 Persistent Agent Host                  │   │
-│  └─────────────────────────────────────────────────────────────┘   │
-│                              │                                       │
-│              ┌───────────────┼───────────────┐                      │
-│              ▼               ▼               ▼                      │
-│  ┌─────────────────┐ ┌─────────────┐ ┌─────────────────┐           │
-│  │   TIER 1: FREE  │ │ TIER 2: FREE│ │  TIER 3: PAID   │           │
-│  │   Antigravity   │ │  AI Studio  │ │   Vertex AI     │           │
-│  │  Claude/Gemini  │ │   Gemini    │ │ $18K Credits    │           │
-│  │   (Primary)     │ │  (Backup)   │ │ (Safety Net)    │           │
-│  └─────────────────┘ └─────────────┘ └─────────────────┘           │
-│                              │                                       │
-│                              ▼                                       │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │                    🔍 BRAVE SEARCH                           │   │
-│  │               Real-time Web Intelligence                     │   │
-│  └─────────────────────────────────────────────────────────────┘   │
-│                                                                      │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │                  ☁️ GCP COMPUTE ENGINE                       │   │
-│  │              n2-standard-4 • us-central1-a                   │   │
-│  │                  "openclaw-desktop"                          │   │
-│  └─────────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────────┘
-```
+| File | What's Inside |
+|------|---------------|
+| **[setup/quickstart.md](setup/quickstart.md)** | Deploy & manage commands |
+| **[setup/commands.md](setup/commands.md)** | Daily command cheatsheet |
+| **[security/best-practices.md](security/best-practices.md)** | Security & backups |
+| **[security/credentials.md](security/credentials.md)** | Where keys are stored |
+| **[optimization/cost-savings.md](optimization/cost-savings.md)** | 33% cost reduction |
+| **[architecture/system-overview.md](architecture/system-overview.md)** | Current system design |
+| **[architecture/model-strategy.md](architecture/model-strategy.md)** | Fallback chain |
+| **[skills/overview.md](skills/overview.md)** | **SKILLS system (core automation)** |
+| **[skills/current-skills.md](skills/current-skills.md)** | **Active SKILLS inventory** |
 
 ---
 
-## Current Stack
+## Current Status (Feb 2026)
 
-### Core Infrastructure
-
-| Layer | Component | Technology | Status |
-|-------|-----------|------------|--------|
-| **Infrastructure** | Cloud Host | GCP n2-standard-4 | ✅ Live |
-| **Orchestrator** | Agent Host | OpenClaw 2026 Core | ✅ Running |
-| **Primary AI** | Antigravity | Claude/Gemini (FREE) | ✅ Active |
-| **Backup AI** | AI Studio | Gemini 1.5 Pro (FREE) | ✅ Ready |
-| **Safety Net** | Vertex AI | Gemini 2.x ($18K credits) | ✅ Configured |
-| **Messaging** | Telegram | "Pet" - Quick commands | ✅ Connected |
-| **Messaging** | WhatsApp | "Mirror" - Deep thinking | ✅ Connected |
-| **Search** | Web Intelligence | Brave Search API | ✅ Enabled |
-| **Voice STT** | Speech-to-Text | Whisper (local) | ✅ Active |
-| **Voice TTS** | Text-to-Speech | edge-tts (Microsoft) | ✅ Active |
-
-### Extended Capabilities
-
-| Capability | Technology | Status |
-|------------|------------|--------|
-| **Browser Automation** | Playwright + Chromium | ✅ Active |
-| **Persistent Memory** | SQLite | ✅ Active |
-| **Document Processing** | Poppler, Tesseract, pandas | ✅ Active |
-| **Email Gateway** | Gmail API | ✅ Active |
-| **Calendar Integration** | Google Calendar API | ✅ Active |
-| **File Storage** | GCS Bucket | ✅ Active |
-| **Scheduled Tasks** | Cron | ✅ Active |
-| **Version Control** | GitHub SSH | ✅ Active |
+✅ **Running**: openclaw-desktop (n2-standard-4, us-central1-a)  
+✅ **Model**: gemini-2.0-flash (optimized for cost)  
+✅ **Channels**: Telegram, WhatsApp, Voice  
+✅ **Savings**: 33% reduction on Vertex AI costs
 
 ---
 
-## Model Fallback Strategy
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Priority 1: Antigravity (FREE)                             │
-│  └─ gemini-3-pro-low → gemini-3-flash → gemini-3-pro-high  │
-│                                                             │
-│  ↓ If quota exhausted (5hr reset)                          │
-│                                                             │
-│  Priority 2: Vertex AI (PAID - Cheapest First)             │
-│  └─ gemini-2.0-flash → gemini-2.5-flash → gemini-1.5-pro   │
-│                                                             │
-│  Cost: $0.10-$1.25 per 1M input tokens                     │
-│  Budget: $18,000 GCP credits                                │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-## Documentation
-
-Read the docs in order for a complete walkthrough:
-
-| # | Document | Description |
-|---|----------|-------------|
-| 01 | [Overview](docs/01-overview.md) | What is a Digital Employee, architecture |
-| 02 | [Infrastructure](docs/02-infrastructure.md) | GCP VM, environment setup, GitHub access |
-| 03 | [AI Providers](docs/03-ai-providers.md) | Model fallback strategy, Vertex AI |
-| 04 | [Communication](docs/04-communication.md) | Telegram, WhatsApp, voice integration |
-| 05 | [Capabilities](docs/05-capabilities.md) | Browser, email, calendar, storage, memory |
-| 06 | [Quick Reference](docs/06-quick-reference.md) | Commands, paths, troubleshooting |
-| 07 | [Skills Development](docs/07-skills.md) | Creating custom skills (Gmail, Calendar, etc.) |
-| 08 | [Architecture Journey](docs/08-architecture-journey.md) | Evolution from Claude Code to OpenClaw |
-| 09 | [Lead Developer Agent](docs/09-lead-developer.md) | OpenCode integration for coding tasks |
-| 10 | [Agent Framework Vision](docs/10-agent-framework-vision.md) | Future: CDI Digital Auditor architecture |
-| 11 | [Local LLM Deployment](docs/11-local-llm-deployment.md) | GPU-accelerated private inference with vLLM |
-| 12 | [GPU VM Provisioning](docs/12-gpu-vm-provisioning.md) | **Step-by-step guide to create GPU VM** |
-
----
-
-## Quick Reference
+## Quick Start
 
 ### Connect to VM
 ```bash
-gcloud compute ssh --zone "us-central1-a" "openclaw-desktop" --project "linkhealth-care-2024"
+gcloud compute ssh openclaw-desktop \
+  --zone=us-central1-a \
+  --project=linkhealth-care-2024 \
+  --tunnel-through-iap
 ```
 
 ### Check Status
 ```bash
-openclaw gateway status    # Gateway health
-openclaw models status     # Model configuration
+systemctl --user status openclaw-gateway
+openclaw models status
 ```
 
-### Switch Models
+### View Logs
 ```bash
-# Via CLI
-openclaw models set google-vertex/gemini-2.5-pro
-
-# Via Telegram/WhatsApp
-"Switch to gemini-2.5-pro"
-"Use Claude Sonnet"
+journalctl --user -u openclaw-gateway -f
 ```
 
 ---
 
-## Key Locations
-
-### Cloud Resources
+## Key Resources
 
 | Resource | Location |
 |----------|----------|
 | **GCP Console** | https://console.cloud.google.com/ |
-| **GCP Project** | linkhealth-care-2024 |
-| **VM Instance** | openclaw-desktop (us-central1-a) |
-| **GCS Bucket** | gs://openclaw-files-linkhealth |
-
-### VM Paths
-
-| Resource | Path |
-|----------|------|
-| **OpenClaw Config** | `~/.openclaw/openclaw.json` |
-| **Memory Database** | `~/.openclaw/data/memory.db` |
-| **OAuth Credentials** | `~/.openclaw/keys/oauth-credentials.json` |
-| **Gmail Token** | `~/.openclaw/keys/gmail-token.pickle` |
-| **Calendar Token** | `~/.openclaw/keys/calendar-token.pickle` |
-| **Helper Scripts** | `~/.openclaw/scripts/` |
-| **Logs** | `/tmp/openclaw/` |
+| **Project** | linkhealth-care-2024 |
+| **VM** | openclaw-desktop (us-central1-a) |
 | **Gateway Port** | 127.0.0.1:18789 |
-
----
-
-## Repository Structure
-
-```
-digital-employee-infra/
-├── README.md                         # Project overview
-├── docs/
-│   ├── 01-overview.md                # What is a Digital Employee
-│   ├── 02-infrastructure.md          # GCP VM, environment setup
-│   ├── 03-ai-providers.md            # Model fallback strategy
-│   ├── 04-communication.md           # Messaging & voice
-│   ├── 05-capabilities.md            # Extended capabilities
-│   ├── 06-quick-reference.md         # Commands, paths, cheatsheet
-│   ├── 07-skills.md                  # Skills development guide
-│   ├── 08-architecture-journey.md    # Evolution to OpenClaw
-│   ├── 09-lead-developer.md          # OpenCode integration
-│   ├── 10-agent-framework-vision.md  # Future CDI architecture
-│   ├── 11-local-llm-deployment.md    # GPU inference setup
-│   └── 12-gpu-vm-provisioning.md     # GPU VM creation guide
-├── export/
-│   └── images/                       # Architecture diagrams
-└── LLM-Local-Deployment/             # Local GPU inference stack
-    ├── docker-compose.yml            # vLLM + Open WebUI
-    ├── setup.sh                      # Deployment script
-    ├── README.md                     # Deployment guide
-    └── WALKTHROUGH.md                # Step-by-step guide
-```
 
 ---
 
 ## Philosophy
 
-**Why "Turtle"?**
-
-Building reliable AI infrastructure isn't about speed - it's about consistency, reliability, and steady progress. Like the turtle in the fable, this project prioritizes:
-
+Building reliable AI infrastructure through:
 - 🐢 **Stability** over velocity
 - 🐢 **Reliability** over features
 - 🐢 **Cost-efficiency** over power
 - 🐢 **Documentation** over memory
 
-Each iteration adds another layer, another backup, another safeguard - until the system is truly unbreakable.
+Each iteration adds another layer, another backup, another safeguard.
+
+---
+
+## Learn More
+
+Start with **[setup/quickstart.md](setup/quickstart.md)** for deployment guide.

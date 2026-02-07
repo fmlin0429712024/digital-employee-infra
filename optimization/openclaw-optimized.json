@@ -1,0 +1,87 @@
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "google-vertex/gemini-2.0-flash",
+        "fallbacks": [
+          "google-vertex/gemini-2.5-flash",
+          "google-vertex/gemini-1.5-pro"
+        ]
+      },
+      "context": {
+        "maxInitialSize": 8192,
+        "loadStrategy": "minimal"
+      }
+    }
+  },
+  "models": {
+    "providers": {
+      "google-vertex": {
+        "project": "linkhealth-care-2024",
+        "location": "us-central1",
+        "models": [
+          {
+            "id": "gemini-2.0-flash",
+            "alias": "flash",
+            "contextWindow": 1000000,
+            "maxTokens": 8192,
+            "inputCost": 0.10,
+            "outputCost": 0.40,
+            "useFor": ["routine", "quick", "simple"]
+          },
+          {
+            "id": "gemini-2.5-flash",
+            "alias": "flash-plus",
+            "contextWindow": 1000000,
+            "maxTokens": 8192,
+            "inputCost": 0.15,
+            "outputCost": 0.60,
+            "useFor": ["balanced", "moderate"]
+          },
+          {
+            "id": "gemini-1.5-pro",
+            "alias": "pro",
+            "contextWindow": 1000000,
+            "maxTokens": 8192,
+            "inputCost": 1.25,
+            "outputCost": 5.00,
+            "useFor": ["complex", "reasoning", "analysis"]
+          }
+        ],
+        "routing": {
+          "enabled": true,
+          "rules": [
+            {
+              "condition": "simple_query OR status_check OR quick_task",
+              "model": "gemini-2.0-flash"
+            },
+            {
+              "condition": "code_review OR moderate_complexity",
+              "model": "gemini-2.5-flash"
+            },
+            {
+              "condition": "architecture OR complex_reasoning OR multi_step",
+              "model": "gemini-1.5-pro"
+            }
+          ]
+        },
+        "cache": {
+          "enabled": true,
+          "ttl": "1h",
+          "cacheableContent": [
+            "SOUL.md",
+            "USER.md",
+            "system_prompts",
+            "reference_docs"
+          ]
+        }
+      }
+    }
+  },
+  "rateLimit": {
+    "enabled": true,
+    "minRequestInterval": 2000,
+    "burstLimit": 5,
+    "burstWindow": 10000
+  }
+}
