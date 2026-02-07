@@ -1,6 +1,6 @@
 services:
   vllm:
-    image: vllm/vllm-openai:latest
+    image: vllm/vllm-openai:v0.6.3.post1
     container_name: vllm-service
     restart: always
     ipc: host
@@ -15,6 +15,7 @@ services:
       - llm-net
     command: >
       --model deepseek-ai/DeepSeek-R1-Distill-Llama-8B
+      --served-model-name DeepSeek-R1-Distill-Llama-8B
       --gpu-memory-utilization 0.90
       --max-model-len 8192
       --dtype auto
