@@ -17,7 +17,7 @@ services:
       --model deepseek-ai/DeepSeek-R1-Distill-Llama-8B
       --served-model-name DeepSeek-R1-Distill-Llama-8B
       --gpu-memory-utilization 0.90
-      --max-model-len 32768
+      --max-model-len 16384
       --dtype auto
       --api-key ${VLLM_API_KEY}
     deploy:
