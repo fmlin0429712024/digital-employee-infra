@@ -10,6 +10,10 @@
 | **WhatsApp** | Bot Token | `~/.openclaw/.env` |
 | **Gmail** | OAuth Token | `~/.openclaw/keys/gmail-token.pickle` |
 | **Calendar** | OAuth Token | `~/.openclaw/keys/calendar-token.pickle` |
+| **Drive** | OAuth Token | `~/.openclaw/keys/drive-token.pickle` |
+| **Sheets** | OAuth Token | `~/.openclaw/keys/sheets-token.pickle` |
+| **Docs** | OAuth Token | `~/.openclaw/keys/docs-token.pickle` |
+| **Slides** | OAuth Token | `~/.openclaw/keys/slides-token.pickle` |
 | **Brave Search** | API Key | `~/.openclaw/openclaw.json` |
 
 ---
@@ -55,6 +59,18 @@ TELEGRAM_BOT_TOKEN=<token>
 ```
 ~/.openclaw/keys/gmail-token.pickle
 ~/.openclaw/keys/calendar-token.pickle
+```
+
+---
+
+## Google Workspace (Drive / Sheets / Docs / Slides)
+
+### OAuth Tokens
+```
+~/.openclaw/keys/drive-token.pickle
+~/.openclaw/keys/sheets-token.pickle
+~/.openclaw/keys/docs-token.pickle
+~/.openclaw/keys/slides-token.pickle
 ```
 
 ### Regenerate

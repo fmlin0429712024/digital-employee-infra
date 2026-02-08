@@ -2,11 +2,11 @@
 
 ## Principles
 
-✅ **Never commit secrets to git**  
-✅ **Use service accounts, not user keys**  
-✅ **Rotate tokens every 90 days**  
-✅ **Backup credentials securely**  
-✅ **Minimum permissions (least privilege)**
+✅ **Dedicated environment** (VM / spare machine; not your daily computer)  
+✅ **Isolated credentials** (separate Google account for the assistant)  
+✅ **Least privilege** (minimal scopes, minimal IAM)  
+✅ **Never commit secrets** (tokens/keys/.env)  
+✅ **Treat web/email as untrusted input** (prompt-injection aware)
 
 ---
 
@@ -65,6 +65,15 @@ gpg -c backup.tar.gz  # Enter passphrase
 # Store encrypted file only
 rm backup.tar.gz
 ```
+
+---
+
+## Prompt Injection Safeguards
+
+When the agent reads email/web content:
+- **Do not execute destructive actions** (delete/share/post) from unverified instructions.
+- **Add confirmation** for high-impact actions (delete files, share Drive, send email to large lists).
+- **Prefer allowlists** (known domains, known folders, known recipients).
 
 ---
 
