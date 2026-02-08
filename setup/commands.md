@@ -6,18 +6,22 @@
 gcloud compute ssh openclaw-desktop --zone=us-central1-a --project=linkhealth-care-2024 --tunnel-through-iap
 ```
 
-**2. Web UI (Canvas) Access:**
+**2. Get Gateway Token:**
+Run on VM to get your token:
+```bash
+cat ~/.openclaw/openclaw.json | grep "token"
+```
+
+**3. Web UI (Control Dashboard) Access:**
 Run this locally to forward port 18789:
 ```bash
 gcloud compute ssh openclaw-desktop --zone=us-central1-a --project=linkhealth-care-2024 --tunnel-through-iap --ssh-flag="-L 18789:localhost:18789 -N"
 ```
-*Then open in browser:* `http://localhost:18789/__openclaw__/canvas/`
+*Then open in browser:* `http://localhost:18789/`
 
-**3. Get API Token:**
-Run on VM:
-```bash
-cat ~/.openclaw/openclaw.json | grep "token"
-```
+**4. Authenticate:**
+- Paste your Gateway Token in the "Gateway Token" field
+- Click **Connect**
 
 ---
 

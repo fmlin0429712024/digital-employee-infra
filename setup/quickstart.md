@@ -10,7 +10,26 @@ gcloud compute ssh openclaw-desktop \
   --tunnel-through-iap
 ```
 
-### 2. Check Status
+### 2. Get Gateway Token
+```bash
+# Run on VM to get your token
+cat ~/.openclaw/openclaw.json | grep "token"
+```
+
+### 3. Access Web UI
+```bash
+# Forward port (run locally)
+gcloud compute ssh openclaw-desktop \
+  --zone=us-central1-a \
+  --project=linkhealth-care-2024 \
+  --tunnel-through-iap \
+  --ssh-flag="-L 18789:localhost:18789 -N"
+
+# Then open: http://localhost:18789/
+# Paste token and click Connect
+```
+
+### 3. Check Status
 ```bash
 # Gateway
 systemctl --user status openclaw-gateway
