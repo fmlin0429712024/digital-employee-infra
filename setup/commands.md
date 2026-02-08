@@ -1,134 +1,71 @@
-# Command Cheatsheet
+# VM Cheat Sheet
 
-## Daily Operations
-
-### Connect
+## 🚀 Connect
+**1. Terminal Access:**
 ```bash
 gcloud compute ssh openclaw-desktop --zone=us-central1-a --project=linkhealth-care-2024 --tunnel-through-iap
 ```
 
-### Status Checks
+**2. Web UI (Canvas) Access:**
+Run this locally to forward port 18789:
+```bash
+gcloud compute ssh openclaw-desktop --zone=us-central1-a --project=linkhealth-care-2024 --tunnel-through-iap --ssh-flag="-L 18789:localhost:18789 -N"
+```
+*Then open in browser:* `http://localhost:18789/__openclaw__/canvas/`
+
+**3. Get API Token:**
+Run on VM:
+```bash
+cat ~/.openclaw/openclaw.json | grep "token"
+```
+
+---
+
+## ⚙️ Setup Commands
+| Command | Usage |
+|---------|-------|
+| `openclaw configure` | **Local Setup**: Interactively creates `openclaw.json` with API keys, model preferences, and paths. **Run this first.** |
+| `openclaw onboard` | **Server Registration**: Connects/Registers the agent with the central control plane. **Run this to link to the server.** |
+
+---
+
+## 🔍 Status Checks
+**Run these on the VM:**
+
+### Gateway Status
 ```bash
 systemctl --user status openclaw-gateway
+```
+
+### Model Status
+```bash
 openclaw models status
-openclaw gateway status
 ```
 
-### Restart
+### View Logs (Live)
 ```bash
-systemctl --user restart openclaw-gateway
-```
-
-### View Logs
-```bash
-# Live logs
 journalctl --user -u openclaw-gateway -f
-
-# Last 50 lines
-journalctl --user -u openclaw-gateway -n 50
-
-# Today's log file
-tail -f /tmp/openclaw/openclaw-$(date +%Y-%m-%d).log
 ```
 
 ---
 
-## Configuration
-
-### Backup Config
-```bash
-cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup.$(date +%Y%m%d)
-```
-
-### Edit Config
-```bash
-nano ~/.openclaw/openclaw.json
-
-# Validate JSON
-cat ~/.openclaw/openclaw.json | jq '.'
-```
-
-### View Current Model
-```bash
-cat ~/.openclaw/openclaw.json | jq '.agents.defaults.model'
-```
+## 📂 Key Locations
+| Item | Path |
+|------|------|
+| **Config** | `~/.openclaw/openclaw.json` |
+| **Logs** | `/tmp/openclaw/openclaw-*.log` |
+| **Workspace**| `~/.openclaw/workspace/` |
 
 ---
 
-## File Operations
-
-### Upload to VM
+## 🛠️ Troubleshooting
+**Restart Gateway:**
 ```bash
-gcloud compute scp LOCAL_FILE openclaw-desktop:~/.openclaw/ \
-  --zone=us-central1-a --project=linkhealth-care-2024 --tunnel-through-iap
-```
-
-### Download from VM
-```bash
-gcloud compute scp openclaw-desktop:~/.openclaw/FILE ./ \
-  --zone=us-central1-a --project=linkhealth-care-2024 --tunnel-through-iap
-```
-
-### Backup Keys
-```bash
-gcloud compute scp --recurse openclaw-desktop:~/.openclaw/keys/ ./backup/ \
-  --zone=us-central1-a --project=linkhealth-care-2024 --tunnel-through-iap
-```
-
----
-
-## Monitoring
-
-### Check Costs (GCP Console)
-```
-https://console.cloud.google.com/billing
-→ linkhealth-care-2024
-→ Reports
-→ Filter: Vertex AI
-```
-
-### Resource Usage
-```bash
-# RAM
-free -h
-
-# Disk
-df -h /
-
-# CPU
-top
-```
-
-### Ollama (if installed)
-```bash
-# Status
-sudo systemctl status ollama
-
-# List models
-ollama list
-
-# Test
-ollama run llama3.2:1b "test"
-```
-
----
-
-## Emergency
-
-### Stop Gateway
-```bash
-systemctl --user stop openclaw-gateway
-```
-
-### Restore Config
-```bash
-cp ~/.openclaw/openclaw.json.backup.YYYYMMDD ~/.openclaw/openclaw.json
 systemctl --user restart openclaw-gateway
 ```
 
-### Check VM from Local
+**Check Resources:**
 ```bash
-gcloud compute instances describe openclaw-desktop \
-  --zone=us-central1-a \
-  --format="get(status)"
+free -h  # RAM
+df -h    # Disk
 ```
